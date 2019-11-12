@@ -2,30 +2,17 @@ import React from "react";
 import "./App.css";
 import SearchBar from "./components/search";
 import Results from "./components/results";
+import SearchButton from "./components/button";
+import logo from "./image/image1.png";
 
 class App extends React.Component {
 	constructor() {
 		super();
 		this.state = {
 			search: "",
-			results: []
+			results: null
 		};
 	}
-
-	/*	searchChangeHandler = async text => {
-		this.setState({ search: text, results: null });
-		const result = await searchAPIDebounced(text);
-		console.log(result);
-		this.setState({ result });
-	};*/
-
-	/*	<input
-			onChange={e => {
-				searchChangeHandler(e.target.value);
-			}}
-			value={value}
-			placeholder="Enter location"
-		/>*/
 
 	apiCall = () => {
 		fetch(
@@ -37,20 +24,35 @@ class App extends React.Component {
 			.then(data => this.setState({ results: data }));
 	};
 
+	setTextArea = text => {
+		this.setState({ search: text });
+	};
+
 	searchChangeHandler = text => {
 		this.setState({ search: text });
 		this.apiCall();
 	};
 
 	render() {
+		const { search, results } = this.state;
 		return (
-			<div>
-				<h1>What place are you looking for?</h1>
-				<SearchBar
-					value={this.state.search}
-					searchChangeHandler={this.searchChangeHandler}
-				/>
-				<Results />
+			<div className="app">
+				<img src={logo} alt={logo} width="auto" height="150px" />
+				<div className="app-inner">
+					<h2>What place are you looking for?</h2>
+					<SearchBar
+						value={search}
+						searchChangeHandler={this.searchChangeHandler}
+					/>
+
+					{results && (
+						<Results
+							results={results}
+							setTextArea={this.setTextArea}
+						/>
+					)}
+					<SearchButton textArea={this.state.search} />
+				</div>
 			</div>
 		);
 	}
