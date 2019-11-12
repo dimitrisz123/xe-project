@@ -18,7 +18,8 @@ class App extends React.Component {
 		fetch(
 			`http://35.180.182.8/Search?keywords=${
 				this.state.search
-			}&language=en&limit=20`
+			}&language=${navigator.userLanguage ||
+				navigator.language.split("-")[0]}&limit=20`
 		)
 			.then(res => res.json())
 			.then(data => this.setState({ results: data }));
