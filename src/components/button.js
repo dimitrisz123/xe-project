@@ -1,11 +1,16 @@
 import React from "react";
 import "./button.css";
 
-const SearchButton = ({ textArea }) => {
+const SearchButton = ({ textArea, searchButtonDisabled }) => {
 	return (
-		<div>
+		<div className="button-wrapper">
 			<a href={`https://www.google.com/search?&q=${textArea}`}>
-				<button className="search-button">Click to search</button>
+				<button
+					disabled={searchButtonDisabled}
+					className="search-button"
+				>
+					Click to search
+				</button>
 			</a>
 		</div>
 	);

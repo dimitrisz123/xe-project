@@ -1,7 +1,7 @@
 import React from "react";
 import "./results.css";
 
-const Results = ({ results, setTextArea }) => {
+const Results = ({ results, setTextArea, resultsWindowHandler }) => {
 	console.log(results);
 	return (
 		<div className="autocomplete-items">
@@ -10,6 +10,7 @@ const Results = ({ results, setTextArea }) => {
 					<p
 						onClick={() => {
 							setTextArea(result.name);
+							resultsWindowHandler(false);
 						}}
 						key={i}
 					>

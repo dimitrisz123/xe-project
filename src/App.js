@@ -10,7 +10,9 @@ class App extends React.Component {
 		super();
 		this.state = {
 			search: "",
-			results: null
+			results: null,
+			showResultsWindow: false,
+			searchButtonDisabled: true
 		};
 	}
 
@@ -22,7 +24,12 @@ class App extends React.Component {
 				navigator.language.split("-")[0]}&limit=20`
 		)
 			.then(res => res.json())
-			.then(data => this.setState({ results: data }));
+			.then(data =>
+				this.setState({
+					results: data,
+					showResultsWindow: true
+				})
+			);
 	};
 
 	setTextArea = text => {
@@ -34,11 +41,19 @@ class App extends React.Component {
 		this.apiCall();
 	};
 
+	resultsWindowHandler = windowState => {
+		this.setState({ showResultsWindow: windowState });
+	};
+
 	render() {
-		const { search, results } = this.state;
+		const { search, results, showResultsWindow } = this.state;
+
 		return (
-			<div className="app">
-				<img src={logo} alt={logo} width="auto" height="150px" />
+			<div
+				onClick={() => this.resultsWindowHandler(false)}
+				className="app"
+			>
+				<img src={logo} alt={logo} width="150px" height="150px" />
 				<div className="app-inner">
 					<h2>What place are you looking for?</h2>
 					<SearchBar
@@ -46,13 +61,22 @@ class App extends React.Component {
 						searchChangeHandler={this.searchChangeHandler}
 					/>
 
-					{results && (
+					{showResultsWindow && (
 						<Results
 							results={results}
 							setTextArea={this.setTextArea}
+							resultsWindowHandler={this.resultsWindowHandler}
 						/>
 					)}
-					<SearchButton textArea={this.state.search} />
+					<SearchButton
+						searchButtonDisabled={
+							!this.state.results ||
+							!this.state.results.entries[0]
+								? true
+								: false
+						}
+						textArea={search}
+					/>
 				</div>
 			</div>
 		);
