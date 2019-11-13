@@ -13,8 +13,8 @@ For development, you will only need Node.js installed on your environement.
 
 ## Install
 
-    $ git clone https://github.com/ORG/PROJECT.git
-    $ cd PROJECT
+    $ git clone https://github.com/dimitrisz123/xe-project.git
+    $ cd xe-project
     $ npm install
 
 ## Available Scripts
