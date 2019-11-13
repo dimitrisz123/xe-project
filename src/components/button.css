@@ -10,6 +10,12 @@
 	}
 
 	div.app-inner > h2 {
-		font-size: 1.1em;
+		font-size: 1rem;
+	}
+}
+
+@media screen and (max-width: 425px) {
+	div.app-inner > h2 {
+		font-size: 0.8rem;
 	}
 }

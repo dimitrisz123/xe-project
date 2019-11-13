@@ -8,6 +8,7 @@ const Results = ({ results, setTextArea, resultsWindowHandler }) => {
 			{results.entries.map((result, i) => {
 				return (
 					<p
+						className="results-inner"
 						onClick={() => {
 							setTextArea(result.name);
 							resultsWindowHandler(false);

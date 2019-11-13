@@ -3,3 +3,9 @@
 	border-top: none;
 	cursor: pointer;
 }
+
+.results-inner {
+	overflow: hidden;
+	white-space: nowrap;
+	font-size: 0.8rem;
+}

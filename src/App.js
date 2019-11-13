@@ -12,8 +12,15 @@ class App extends React.Component {
 			search: "",
 			results: null,
 			showResultsWindow: false,
-			searchButtonDisabled: true
+			searchButtonDisabled: true,
+			limitResults: "20"
 		};
+	}
+
+	componentDidMount() {
+		if (window.screen.width <= 425) {
+			this.setState({ limitResults: "10" });
+		}
 	}
 
 	apiCall = () => {
@@ -21,7 +28,9 @@ class App extends React.Component {
 			`http://35.180.182.8/Search?keywords=${
 				this.state.search
 			}&language=${navigator.userLanguage ||
-				navigator.language.split("-")[0]}&limit=20`
+				navigator.language.split("-")[0]}&limit=${
+				this.state.limitResults
+			}`
 		)
 			.then(res => res.json())
 			.then(data =>
