@@ -20,7 +20,6 @@ class App extends React.Component {
   componentDidMount() {
     if (window.screen.width <= 425) {
       this.setState({ limitResults: "10" });
-      console.log("te223423st");
     }
   }
 
